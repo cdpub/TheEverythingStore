@@ -24,6 +24,7 @@ namespace TheEverythingStore.Models
         [StringLength(8000)]
         public string Description { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal Price { get; set; }
 
         [StringLength(255)]
