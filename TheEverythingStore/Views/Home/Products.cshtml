@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<TheEverythingStore.Models.Product>
+
+
+@{
+
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    
+   @* @foreach (var p in ViewBag.Products)*@
+
+    @*passing in strongly typed data*@
+    @foreach (var p in Model)
+    {
+        <li>@p.Name</li>
+    }
+
+</ul>
+
