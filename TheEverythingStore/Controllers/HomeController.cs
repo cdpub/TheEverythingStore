@@ -60,5 +60,13 @@ namespace TheEverythingStore.Controllers
             //load the view and pass the product list to it
             return View(products);
         }
+
+        public ActionResult ViewProduct(string Productname)
+        {
+            //pass the string to the view using ViewBag since it is a single string value 
+            //but can also use strongly type
+            ViewBag.ProductName = Productname;
+            return View();
+        }
     }
 }

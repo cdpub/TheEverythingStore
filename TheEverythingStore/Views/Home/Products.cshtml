@@ -1,4 +1,5 @@
 ﻿
+@*getting a list of product*@
 @model IEnumerable<TheEverythingStore.Models.Product>
 
 
@@ -17,7 +18,11 @@
     @*passing in strongly typed data*@
     @foreach (var p in Model)
     {
-        <li>@p.Name</li>
+        //<li>@p.Name</li>
+
+        //create new method to show details of a particular product in Home controller
+        //add 4th parameter pass in a  new variable called productName, last parameter set to tnull
+        <li>@Html.ActionLink(p.Name, "ViewProduct", "Home", new {ProductName = p.Name }, null )</li>
     }
 
 </ul>
