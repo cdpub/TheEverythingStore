@@ -17,7 +17,8 @@ namespace TheEverythingStore.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            //add some sorting by categories by creating in-memory parameter c referencing to categories object
+            return View(db.Categories.OrderBy(c => c.Name).ToList());
         }
 
         // GET: Categories/Details/5
