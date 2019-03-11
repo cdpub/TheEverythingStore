@@ -116,6 +116,7 @@ namespace TheEverythingStore.Controllers
 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);

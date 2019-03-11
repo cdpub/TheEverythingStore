@@ -65,7 +65,7 @@ namespace TheEverythingStore.Controllers
             //}
 
             //use db object to create the database 
-            //use theproduct model to retrieve the entire product list from the sql server
+            //use the product model to retrieve the entire product list from the sql server
             var products = db.Products.ToList();
 
             //load the view and pass the product list to it

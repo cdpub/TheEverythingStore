@@ -30,6 +30,7 @@
                     {
                         <li>@Html.ActionLink("Products", "Index", "Products")</li>
                     }
+
                     @if (User.IsInRole("Administrator"))
                     {
                         <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
