@@ -11,6 +11,7 @@ using TheEverythingStore.Models;
 
 namespace TheEverythingStore.Controllers
 {
+    //restricts anonymous user from accessing the views without authentication
     [Authorize (Roles = "Administrator") ]
     public class ProductsController : Controller
     {
@@ -101,6 +102,7 @@ namespace TheEverythingStore.Controllers
                         //remove path from Edge uploads
                         string fName = Path.GetFileName(file.FileName);
 
+                        
                         string path = Server.MapPath("~/Content/Images/" + fName);
                         file.SaveAs(path);
                         product.Photo = fName;
@@ -108,7 +110,7 @@ namespace TheEverythingStore.Controllers
                 }
                 else
                 {
-                    //no new photo, keep the old file name
+                    //no new photo, keep the old file name; keep current value of existing photo if no file upload upon edit data
                     product.Photo = CurrentPhoto;
                 }
 

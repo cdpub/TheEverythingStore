@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                    
-                    @* other method of authentication *@
+                    @* other method of authentication to check if user is anonymous or logged-in *@
                     @* @if (User.Identity.IsAuthenticated)*@
 
                     @if (Request.IsAuthenticated)
