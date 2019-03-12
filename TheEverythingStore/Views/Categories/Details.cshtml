@@ -29,13 +29,12 @@
         <th>Name</th>
         <th>Price</th>
     </tr>
-
     @foreach (var p in Model.Products)
     {
-     <tr>
-         <td>@p.Name</td>
-         <td>@String.Format("{0:c}", p.Price)</td>
-      </tr>
+        <tr>
+            <td>@p.Name</td>
+            <td>@String.Format("{0:c}", p.Price)</td>
+        </tr>
     }
 </table>
 

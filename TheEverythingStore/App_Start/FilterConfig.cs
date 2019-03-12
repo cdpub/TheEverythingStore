@@ -8,8 +8,7 @@ namespace TheEverythingStore
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-
-            //force all request to use ssl
+            // force all requests to use ssl
             filters.Add(new RequireHttpsAttribute());
         }
     }

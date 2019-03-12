@@ -25,7 +25,7 @@ namespace TheEverythingStore.Models
         public string Description { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:c}")]
-        [Range(0.01, 100000)]     //set validation rule range (min, max)
+        [Range(0.01, 100000)]
         public decimal Price { get; set; }
 
         [StringLength(255)]

@@ -7,39 +7,34 @@
 
 <h2>Products</h2>
 
-@if (User.IsInRole ("Administrator"))
-{
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Administrator")) {
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
-<table class="table table-striped table-hover sortable"   >
+<table class="table table-striped table-hover sortable">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.Category.Name)*@
             Category
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Name)*@
             Product
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Photo)
         </th>
-
         @if (User.IsInRole("Administrator"))
             {
                 <th>Actions</th>
             }
+
         </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Category.Name)
@@ -47,9 +42,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
@@ -59,18 +51,18 @@
                 <img src="~/Content/Images/@item.Photo" class="thumb" />
             }
         </td>
-        
+
         @if (User.IsInRole("Administrator"))
         {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) 
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
                 |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) 
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId })
                 |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-            </td>
+            </td>                
         }
-    </tr>
-}
+        </tr>
+    }
 
 </table>

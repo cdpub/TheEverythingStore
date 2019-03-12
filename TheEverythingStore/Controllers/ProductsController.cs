@@ -11,8 +11,7 @@ using TheEverythingStore.Models;
 
 namespace TheEverythingStore.Controllers
 {
-    //restricts anonymous user from accessing the views without authentication
-    [Authorize (Roles = "Administrator") ]
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private DbModel db = new DbModel();
@@ -26,7 +25,6 @@ namespace TheEverythingStore.Controllers
         }
 
         // GET: Products/Details/5
-
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,7 +64,7 @@ namespace TheEverythingStore.Controllers
             return View(product);
         }
 
-        // GET: Products/Edit/5 === loads the form and populates it with current data
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,27 +80,25 @@ namespace TheEverythingStore.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5 === process file upload
+        // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductId,Name,Description,Price,Photo,CategoryId")] Product product, String CurrentPhoto)
         {
-            //checks validation
             if (ModelState.IsValid)
             {
-                //check for a file upload
+                // check for a file upload
                 if (Request.Files != null)
                 {
                     var file = Request.Files[0];
 
                     if (file.FileName != null && file.ContentLength > 0)
                     {
-                        //remove path from Edge uploads
+                        // remove path from Edge uploads
                         string fName = Path.GetFileName(file.FileName);
 
-                        
                         string path = Server.MapPath("~/Content/Images/" + fName);
                         file.SaveAs(path);
                         product.Photo = fName;
@@ -110,11 +106,9 @@ namespace TheEverythingStore.Controllers
                 }
                 else
                 {
-                    //no new photo, keep the old file name; keep current value of existing photo if no file upload upon edit data
+                    // no new photo, keep the old file name
                     product.Photo = CurrentPhoto;
                 }
-
-
 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();

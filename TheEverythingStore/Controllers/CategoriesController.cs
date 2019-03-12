@@ -18,7 +18,6 @@ namespace TheEverythingStore.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            //add some sorting by categories by creating in-memory parameter c referencing to categories object
             return View(db.Categories.OrderBy(c => c.Name).ToList());
         }
 
@@ -37,13 +36,13 @@ namespace TheEverythingStore.Controllers
             return View(category);
         }
 
-        // GET: Categories/Create - display blank form
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create - process the update
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

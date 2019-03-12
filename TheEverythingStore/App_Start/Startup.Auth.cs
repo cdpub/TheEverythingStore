@@ -56,8 +56,8 @@ namespace TheEverythingStore
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-                appId: ConfigurationManager.AppSettings["FacebookAppId"],
-                appSecret: ConfigurationManager.AppSettings["FacebookAppSecret"]);
+               appId: ConfigurationManager.AppSettings["FacebookAppId"],
+               appSecret: ConfigurationManager.AppSettings["FacebookAppSecret"]);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
