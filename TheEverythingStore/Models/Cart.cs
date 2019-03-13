@@ -17,6 +17,8 @@ namespace TheEverythingStore.Models
 
         public decimal Price { get; set; }
 
+        public string Username { get; set; }
+
         public virtual Product Product { get; set; }
     }
 }
