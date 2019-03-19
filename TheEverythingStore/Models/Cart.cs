@@ -8,8 +8,8 @@ namespace TheEverythingStore.Models
 
     public partial class Cart
     {
-        [StringLength(100)]
-        public string CartId { get; set; }
+        
+        public int CartId { get; set; }
 
         public int ProductId { get; set; }
 

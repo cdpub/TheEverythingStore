@@ -272,6 +272,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\Products.cshtml" />
+    <Content Include="Views\Store\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Browsers\" />

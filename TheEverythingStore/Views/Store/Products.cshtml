@@ -12,10 +12,10 @@
     @foreach (var item in Model)
     {
     <div class="col-md-4 text-center well">
-        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-        <p>@Html.DisplayFor(modelItem => item.Description)</p>
-        <h5>@Html.DisplayFor(modelItem => item.Price)</h5>
-        @if (item.Photo != null)
+        <h4>    @Html.DisplayFor(modelItem => item.Name)</h4>
+        <p>     @Html.DisplayFor(modelItem => item.Description)</p>
+        <h5>    @Html.DisplayFor(modelItem => item.Price)</h5>
+            @if (item.Photo != null)
         {
             <div>
                 <img src="~/Content/Images/@item.Photo" height="75" />
