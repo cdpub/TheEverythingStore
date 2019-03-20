@@ -15,13 +15,12 @@
         <h4>    @Html.DisplayFor(modelItem => item.Name)</h4>
         <p>     @Html.DisplayFor(modelItem => item.Description)</p>
         <h5>    @Html.DisplayFor(modelItem => item.Price)</h5>
-            @if (item.Photo != null)
-        {
-            <div>
-                <img src="~/Content/Images/@item.Photo" height="75" />
-            </div>
-
-        }
+                @if (item.Photo != null)
+            {
+                <div>
+                    <img src="~/Content/Images/@item.Photo" height="75" />
+                </div>
+            }
 
         <a href=" /store/addtocart/@item.ProductId">
             <button class="btn btn-primary">Add to Cart</button>

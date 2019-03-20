@@ -76,5 +76,64 @@ namespace TheEverythingStore.Controllers
             return View(cartItems);
         }
 
+        // GET: Store/Checkout
+        [Authorize]
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        // POST: Store/Checkout
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Checkout(FormCollection formCollection)
+        {
+            Order order = new Order();
+
+            //validate
+            TryUpdateModel(order);
+
+            //set the 3 auto properties
+            order.OrderDate = DateTime.Now;
+            order.UserId = User.Identity.Name;
+
+            //calculate cart total
+            decimal cartTotal;
+            var cartItems = db.Carts.Where(c => c.Username == User.Identity.Name).ToList();
+
+            cartTotal = (from c in cartItems
+                         select (int)c.Quantity * c.Price).Sum();
+
+            order.Total = cartTotal;
+
+            //save the order
+            db.Orders.Add(order);
+            db.SaveChanges();
+
+            //save Order Details
+            foreach (Cart item in cartItems)
+            {
+                OrderDetail orderDetail = new OrderDetail
+                {
+                    OrderId = order.OrderId,
+                    ProductId = item.ProductId,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                };
+
+                db.OrderDetails.Add(orderDetail);
+            }
+            db.SaveChanges();
+
+            //clear the cart
+            foreach (Cart item in cartItems)
+            {
+               db.Carts.Remove(item);
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Orders", new { id = order.OrderId });
+        }
     }
 }

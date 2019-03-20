@@ -15,6 +15,7 @@ namespace TheEverythingStore.Models
 
         public int Quantity { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal Price { get; set; }
 
         public string Username { get; set; }
