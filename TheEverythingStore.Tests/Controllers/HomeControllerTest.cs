@@ -22,7 +22,8 @@ namespace TheEverythingStore.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            //Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ViewName);
         }
 
         [TestMethod]
@@ -39,6 +40,19 @@ namespace TheEverythingStore.Tests.Controllers
         }
 
         [TestMethod]
+        public void AboutLoadsView()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.About() as ViewResult;
+
+            // Assert
+            Assert.AreEqual("About", result.ViewName);
+        }
+
+        [TestMethod]
         public void Contact()
         {
             // Arrange
@@ -48,7 +62,8 @@ namespace TheEverythingStore.Tests.Controllers
             ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            //Assert.IsNotNull(result);
+            Assert.AreEqual("Contact", result.ViewName);
         }
     }
 }

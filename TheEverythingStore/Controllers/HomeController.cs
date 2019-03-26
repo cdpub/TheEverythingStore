@@ -14,21 +14,21 @@ namespace TheEverythingStore.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View("About");
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View("Contact");
         }
 
         public ActionResult Products()

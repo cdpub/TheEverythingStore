@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Linq;
+using System.Linq; // for sorting
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +13,36 @@ namespace TheEverythingStore.Controllers
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
-        private DbModel db = new DbModel();
+        //private DbModel db = new DbModel();
+
+        /*  modify DbModel to allow dependency injection, 
+            if controller receives mock data, goes to mock repository
+            if controller receives no data object, goes to database model
+            first install moq for handling mock data; 
+            move DBModel to Idata repository 
+
+            then,  create 2 constructors - default constructor for db connection
+            constructor with fake params for testing
+
+            then, in models, create an interface class for two reposities
+            one for mock and one for actual db data that inherits mock repository
+        
+            refactor save (find), edit (find) and delete 
+        */
+
+        IMockCategories db;
+
+        // constructors
+        // default constructor: no input params => use SQL Server & Entity Framework
+        public CategoriesController()
+        {
+            this.db = new IDataCategories();
+        }
+        //constructor with fake params; return mock db
+        public CategoriesController(IMockCategories mockDb)
+        {
+            this.db = mockDb;
+        }
 
         // GET: Categories
         public ActionResult Index()
@@ -28,7 +57,10 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+
+            //refactor find with SingleorDefault
+            //Category category = db.Categories.Find(id);
+             Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -51,8 +83,11 @@ namespace TheEverythingStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                //modify these with new save method in IDataCategories
+                //db.Categories.Add(category);
+                //db.SaveChanges();
+                db.Save(category);
+      
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +101,9 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            //refactor find with SingleorDefault
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -83,8 +120,11 @@ namespace TheEverythingStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                //modify these with new save method in IDataCategories
+                //db.Entry(category).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Save(category);
+
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -97,7 +137,9 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            //refactor find with SingleorDefault
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -110,9 +152,15 @@ namespace TheEverythingStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            //refactor find with SingleorDefault
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
+
+            //modify and replace with IDataCategories Delete
+            //db.Categories.Remove(category);
+            //db.SaveChanges();
+            db.Delete(category);
+ 
             return RedirectToAction("Index");
         }
 
